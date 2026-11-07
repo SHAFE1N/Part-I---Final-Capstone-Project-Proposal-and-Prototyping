@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f7f5">
+  <title>BlueBridge · Project planner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="gantt-fixes.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="BlueBridge planner home"><span class="brand-mark">B</span><span>bluebridge<span class="brand-light"> / planner</span></span></a>
+      <div class="top-right"><span class="save-state"><i></i><span id="save-label">Loading plan</span></span><button id="save-btn" class="button button-dark" type="button">Save plan <span aria-hidden="true">↗</span></button></div>
+    </header>
+    <section class="hero" id="top">
+      <div class="eyebrow"><span class="eyebrow-line"></span> CAPSTONE PROJECT · IT24050</div>
+      <div class="hero-row"><div><h1>Make time for<br><em>what you’re building.</em></h1><p class="hero-copy">A realistic daily plan for the BlueBridge audio streaming prototype. Shape the work, see the dates, and keep every estimate in one place.</p></div>
+      <div class="project-chip"><span class="chip-icon">◉</span><div><b>BlueBridge</b><small>Bluetooth audio · Phase I</small></div><span class="chip-dot"></span></div></div>
+    </section>
+    <section class="overview" aria-label="Project overview">
+      <div class="metric"><span class="metric-label">TOTAL ESTIMATED EFFORT</span><div><strong id="total-hours">—</strong><span class="metric-unit">hours</span></div><small>Across <span id="task-count">0</span> project milestones</small></div>
+      <div class="metric"><span class="metric-label">DAILY FOCUS TIME</span><div><strong id="daily-hours">—</strong><span class="metric-unit">hrs / day</span></div><small>To meet your chosen deadline</small></div>
+      <div class="metric"><span class="metric-label">PROJECTED FINISH</span><div><strong id="finish-date">—</strong></div><small id="finish-note">Based on working days</small></div>
+      <div class="metric metric-progress"><span class="metric-label">CAPACITY CHECK</span><div class="capacity-line"><strong id="capacity-status">—</strong><span id="capacity-pill" class="pill">—</span></div><small id="capacity-note">Update your plan to see the fit</small></div>
+    </section>
+    <section class="workbench">
+      <div class="section-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> YOUR PROJECT</div><h2>Plan the work</h2></div><button id="add-task" class="button button-outline" type="button"><span class="plus">+</span> Add milestone</button></div>
+      <div class="planner-grid">
+        <div class="task-panel">
+          <div class="panel-head"><div><b>Project milestones</b><span id="tasks-subtitle">Set a time estimate for each phase</span></div><span class="column-label">EST. HOURS</span></div>
+          <div id="task-list" class="task-list"></div>
+          <div class="task-total"><span>Estimated project effort</span><b><span id="task-total-hours">0</span> <small>hrs</small></b></div>
+        </div>
+        <aside class="settings-panel">
+          <div class="panel-head"><div><b>Schedule settings</b><span>Set your planning window</span></div><span class="settings-icon">⚙</span></div>
+          <label class="field-label" for="start-date">START DATE</label><input id="start-date" class="field" type="date">
+          <label class="field-label" for="deadline">TARGET DEADLINE</label><input id="deadline" class="field" type="date">
+          <div class="settings-pair"><label><span class="field-label">DAYS / WEEK</span><select id="days-week" class="field"><option value="5">5 days · Mon–Fri</option><option value="6">6 days · Mon–Sat</option><option value="7">7 days · Every day</option></select></label>
+            <label><span class="field-label">HOURS / DAY</span><span class="number-wrap"><input id="hours-day" class="field" type="number" min="1" max="16" step="0.5" value="4"><span>hrs</span></span></label></div>
+          <div class="insight"><span class="insight-star">✳</span><p><b>A little progress adds up.</b><br><span id="insight-text">Set your dates and estimates to see your daily pace.</span></p></div>
+        </aside>
+      </div>
+    </section>
+    <section class="timeline-section">
+      <div class="section-heading timeline-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> PROJECT TIMELINE</div><h2>See the path ahead</h2><p class="section-copy">Your milestones laid out by working day, based on the estimates above.</p></div><div class="legend"><span><i class="legend-dot dot-planning"></i>Planning</span><span><i class="legend-dot dot-build"></i>Build</span><span><i class="legend-dot dot-delivery"></i>Delivery</span></div></div>
+      <div class="gantt-card"><div id="gantt" class="gantt"></div><div class="gantt-footer"><span><span class="today-dot"></span> TODAY</span><span id="timeline-summary">Schedule updates as you edit estimates</span></div></div>
+      <footer><span>BLUEBRIDGE <i>·</i> CAPSTONE PROJECT PLANNER</span><span>Built for focused, incremental progress.</span></footer>
+    </section>
+  </main>
+  <template id="task-template"><div class="task-row"><span class="drag-handle" aria-hidden="true">⠿</span><span class="task-index"></span><input class="task-name" aria-label="Milestone name" maxlength="70"><select class="task-category" aria-label="Milestone category"><option value="Planning">Planning</option><option value="Build">Build</option><option value="Delivery">Delivery</option></select><label class="hours-entry"><input class="task-hours" type="number" min="0.5" max="500" step="0.5" aria-label="Estimated hours"><span>h</span></label><button class="remove-task" type="button" aria-label="Remove milestone">×</button></div></template>
+  <script src="app.js"></script>
+</body>
+</html>

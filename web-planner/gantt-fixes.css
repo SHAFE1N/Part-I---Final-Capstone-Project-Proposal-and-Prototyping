@@ -1,0 +1,3 @@
+.gantt-row{grid-template-columns:182px minmax(0,1fr)}
+@media(max-width:760px){.gantt-row{grid-template-columns:145px minmax(0,1fr)}}
+@media(max-width:420px){.gantt-row{grid-template-columns:125px minmax(0,1fr)}}

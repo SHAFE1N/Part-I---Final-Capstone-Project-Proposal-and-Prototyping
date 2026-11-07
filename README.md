@@ -208,5 +208,15 @@ java -cp out Main
 ```
 In IntelliJ, open the folder as a project, open `src/Main.java`, and run `main()`. No third-party dependencies are needed. Take a real screenshot after running it and add it to your repository if required.
 
-## 17. Future deliverables
+## 17. Web project planner
+The `web-planner/` folder contains a browser-based daily effort calculator and date-based Gantt chart for the six BlueBridge milestones above. Edit milestone effort, start and target dates, workdays per week, and available hours per day. The planner calculates the daily focus time needed, flags whether it fits the available capacity, and projects a finish date. Use **Save plan** to store the current plan in a local SQLite database.
+
+Run it with Python 3 (no external packages required):
+```bash
+cd web-planner
+python server.py
+```
+Then open http://localhost:8000. The SQLite database is created as `web-planner/planner.db` on first run and is ignored by Git; the saved plan stays on the machine running the server.
+
+## 18. Future deliverables
 Android app and Windows companion source; verified message exchange; audio prototype; test results and screenshots; updated documentation. Actual implementation results will be recorded rather than assumed.
