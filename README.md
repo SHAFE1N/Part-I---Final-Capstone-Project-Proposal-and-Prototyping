@@ -106,7 +106,7 @@ flowchart TD
 ```
 
 ## 11. Entity Relationship Diagram
-Conceptual in-memory model only; no database is implemented or required.
+Conceptual model for the planned streaming session. The separate web planner persists its schedule in SQLite; streaming session data is not yet stored.
 ```mermaid
 erDiagram
     DEVICE ||--o{ CONNECTION_SESSION : participates
@@ -209,14 +209,14 @@ java -cp out Main
 In IntelliJ, open the folder as a project, open `src/Main.java`, and run `main()`. No third-party dependencies are needed. Take a real screenshot after running it and add it to your repository if required.
 
 ## 17. Web project planner
-The `web-planner/` folder contains a browser-based daily effort calculator and date-based Gantt chart for the six BlueBridge milestones above. Edit milestone effort, start and target dates, workdays per week, and available hours per day. The planner calculates the daily focus time needed, flags whether it fits the available capacity, and projects a finish date. Use **Save plan** to store the current plan in a local SQLite database.
+The `web-planner/` folder contains the browser-based daily effort calculator and date-based Gantt chart. Its backend is a Java Servlet, and plans are saved to SQLite. Edit milestone effort, start and target dates, workdays per week, and available hours per day. The planner calculates the daily focus time needed, checks whether it fits the available capacity, and projects a finish date.
 
-Run it with Python 3 (no external packages required):
+Build the WAR with Java 11+ and Maven:
 ```bash
 cd web-planner
-python server.py
+mvn clean package
 ```
-Then open http://localhost:8000. The SQLite database is created as `web-planner/planner.db` on first run and is ignored by Git; the saved plan stays on the machine running the server.
+Deploy `target/bluebridge-planner.war` to Apache Tomcat 10.1, then open `http://localhost:8080/bluebridge-planner/`. The servlet stores the database at `~/.bluebridge/planner.db` by default. Set the `BLUEBRIDGE_DB` environment variable or Java system property `-Dbluebridge.db=/path/to/planner.db` to choose another path. The database is created automatically and stays on the server running Tomcat.
 
 ## 18. Future deliverables
 Android app and Windows companion source; verified message exchange; audio prototype; test results and screenshots; updated documentation. Actual implementation results will be recorded rather than assumed.

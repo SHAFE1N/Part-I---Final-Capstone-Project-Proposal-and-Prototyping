@@ -1,5 +1,6 @@
 const $ = (s) => document.querySelector(s);
 const list = $('#task-list');
+const API_URL = new URL('api/plan', window.location.href);
 const DAY = 86400000;
 const defaults = {
   startDate: '2026-11-09', deadline: '2026-12-20', daysPerWeek: 5, hoursPerDay: 4,
@@ -129,7 +130,7 @@ async function savePlan() {
   button.disabled = true;
   $('#save-label').textContent = 'Saving to SQLite';
   try {
-    const response = await fetch('/api/plan', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(getPlan()) });
+    const response = await fetch(API_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(getPlan()) });
     if (!response.ok) throw new Error('Could not save plan');
     $('#save-label').textContent = `Saved at ${new Intl.DateTimeFormat(undefined, { hour: 'numeric', minute: '2-digit' }).format(new Date())}`;
     button.classList.remove('dirty');
@@ -144,7 +145,7 @@ $('#start-date').addEventListener('input', () => { update(); setDirty(); });
 $('#deadline').addEventListener('input', () => { update(); setDirty(); });
 $('#days-week').addEventListener('change', () => { update(); setDirty(); });
 $('#hours-day').addEventListener('input', () => { update(); setDirty(); });
-fetch('/api/plan').then(r => r.json()).then(data => {
+fetch(API_URL).then(r => r.json()).then(data => {
   loadPlan(data.plan);
   $('#save-label').textContent = data.plan ? `Saved${data.updatedAt ? ` · ${data.updatedAt.slice(0, 10)}` : ''}` : 'New plan · not saved yet';
   if (!data.plan) setDirty();
