@@ -211,12 +211,9 @@ In IntelliJ, open the folder as a project, open `src/Main.java`, and run `main()
 ## 17. Web project planner
 The `web-planner/` folder contains the browser-based daily effort calculator and date-based Gantt chart. Its backend is a Java Servlet, and plans are saved to SQLite. Edit milestone effort, start and target dates, workdays per week, and available hours per day. The planner calculates the daily focus time needed, checks whether it fits the available capacity, and projects a finish date.
 
-Build the WAR with Java 11+ and Maven:
-```bash
-cd web-planner
-mvn clean package
-```
-Deploy `target/bluebridge-planner.war` to Apache Tomcat 10.1, then open `http://localhost:8080/bluebridge-planner/`. The servlet stores the database at `~/.bluebridge/planner.db` by default. Set the `BLUEBRIDGE_DB` environment variable or Java system property `-Dbluebridge.db=/path/to/planner.db` to choose another path. The database is created automatically and stays on the server running Tomcat.
+Open `web-planner/pom.xml` in IntelliJ IDEA as a Maven project and reload Maven when prompted. Set the project SDK to Java 11 or newer. Install Apache Tomcat 10.1, then configure it in **Settings → Build, Execution, Deployment → Application Servers**. Add a **Tomcat Server → Local** run configuration, select the `bluebridge-planner:war exploded` deployment artifact, set its application context to `/bluebridge-planner`, and run it. IntelliJ's Tomcat run configuration can build and deploy the web artifact as part of starting the server ([JetBrains guide](https://www.jetbrains.com/help/idea/run-debug-configuration-tomcat-server.html)).
+
+Open `http://localhost:8080/bluebridge-planner/` after the server starts. The servlet stores the database at `~/.bluebridge/planner.db` by default. Set the `BLUEBRIDGE_DB` environment variable or Java system property `-Dbluebridge.db=/path/to/planner.db` to choose another path. The database is created automatically and stays on the server running Tomcat.
 
 ## 18. Future deliverables
 Android app and Windows companion source; verified message exchange; audio prototype; test results and screenshots; updated documentation. Actual implementation results will be recorded rather than assumed.
